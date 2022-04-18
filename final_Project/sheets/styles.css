@@ -1,0 +1,17 @@
+html {
+    text-align: center;
+}
+body {
+    background: tan;
+    color: f8f8f8;
+    display: inline;
+    margin: 0;
+}
+canvas {
+    color: f8f8f8;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    display: block;
+    outline: pink;
+    background-color: black;
+}
