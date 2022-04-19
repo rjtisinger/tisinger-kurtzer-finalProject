@@ -27,6 +27,16 @@ function Paddle(x, y = height / 2, dy, width = 15, height = 200) {
         c.fillRect(x, y, width, height);
 
     }
+    this.update = function() {
+
+        // if [keystroke] {
+        // dx*=-1;           }
+
+        x+=dx;
+
+        this.draw();
+
+    }
 
 }
 
