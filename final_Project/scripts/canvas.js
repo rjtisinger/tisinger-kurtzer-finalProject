@@ -2,7 +2,7 @@
 var canvas = document.querySelector('canvas');
 const RAD = 30;
 var width = canvas.width = window.innerWidth - RAD;
-var height = canvas.height = window.innerHeight;
+var heightG = canvas.height = window.innerHeight;
 
 // c is short for context; 2d means 2 dimensions
 var c = canvas.getContext('2d');
@@ -10,11 +10,9 @@ var c = canvas.getContext('2d');
 // Rectangles/Paddles:
 // rectangles take whatever color the last fill style was
 c.fillStyle = "white";
-// x,y coordinates are determined from the top left of the canvas
-c.fillRect(00,height/2, 15, 200);
-c.fillRect(width-15, height/2, 15, 200);
 
-function Paddle(x, y = height / 2, dy, width = 15, height = 200) {
+
+function Paddle(x, y = heightG / 2, dy, width = 15, height = 200) {
     this.x = x;
     this.y = y;
     this.dy = dy;
@@ -22,31 +20,34 @@ function Paddle(x, y = height / 2, dy, width = 15, height = 200) {
     this.width = width;
     this.height = height;
 
+
     this.draw = function() {
 
-        c.fillRect(x, y, width, height);
+        c.fillRect(this.x, this.y, this.width, this.height);
+        
 
     }
     this.update = function() {
 
-        // if [keystroke] {
-        // dx*=-1;           }
-
-        x+=dx;
-
+        if (this.y < 0) {
+            this.y = 0;
+        } else if(this.y +this.height > heightG) {
+            this.y = heightG - this.height;
+        }
         this.draw();
+
 
     }
 
 }
 
-var leftPaddle = new Paddle(00, height/2, 1);
-var rightPaddle = new Paddle(width-15, height/2, 1);
+var leftPaddle = new Paddle(00, heightG/2, .07);
+var rightPaddle = new Paddle(width-15, heightG/2, .07);
 
 
 
 // ball: capital functions are objects
-function Ball(x = (width-RAD)/2, y = height / 2, dx = 1, dy = 1, radius = RAD) {
+function Ball(x = (width-RAD)/2, y = heightG / 2, dx = 1, dy = 1, radius = RAD) {
     this.x = x;
     this.y = y;
     this.dx = dx;
@@ -65,7 +66,7 @@ function Ball(x = (width-RAD)/2, y = height / 2, dx = 1, dy = 1, radius = RAD) {
             || isPaddleThere()  ) {
             this.dx*=-1;
         }
-        if (this.y + this.radius > height || this.y - this.radius < 0) {
+        if (this.y + this.radius > heightG || this.y - this.radius < 0) {
             this.dy*=-1;
         }
     
@@ -97,15 +98,38 @@ function isPaddleThere(x, y) {
     else return false;
 }
 
-var radius = 30, ballX = (width-radius)/2, ballY = height/2, ballDX = 1, ballDY = 1;
+function updatePaddle(event) {
+    if ('o' == event.key) {
+        rightPaddle.y = rightPaddle.y - rightPaddle.dy;
+    } 
+    
+    if(event.key === 'w') {
+       leftPaddle.y = leftPaddle.y - leftPaddle.dy;
+    } 
+    
+    if('l' === event.key) {
+        rightPaddle.y+=rightPaddle.dy;
+    } 
+    
+    if('s' === event.key) {
+        leftPaddle.y+=leftPaddle.dy;
+    }
+};
+
+
+
+var radius = 30, ballX = (width-radius)/2, ballY = heightG/2, ballDX = 1, ballDY = 1;
 function animate() {
 
     requestAnimationFrame(animate);
 
-    c.clearRect(0,0,width, height);
+    c.clearRect(0,0,width, heightG);
 
     ball.update();
-    leftPaddle.draw();
-    rightPaddle.draw();
+
+    document.addEventListener('keypress', (e) => this.updatePaddle(e));
+
+    leftPaddle.update();
+    rightPaddle.update();
 }
 animate();
