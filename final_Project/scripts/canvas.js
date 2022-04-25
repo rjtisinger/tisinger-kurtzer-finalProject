@@ -3,6 +3,7 @@ var canvas = document.querySelector('canvas');
 const RAD = 30;
 var width = canvas.width = window.innerWidth - RAD;
 var heightG = canvas.height = window.innerHeight;
+var ballColor = "white";
 
 // c is short for context; 2d means 2 dimensions
 var c = canvas.getContext('2d');
@@ -71,7 +72,7 @@ function Ball(x = (width-RAD)/2, y = heightG / 2, dx = 1, dy = 1, radius = RAD) 
     this.draw = function() {
         c.beginPath();
         c.strokeStyle = "white";
-        c.fillStyle = "white";
+        c.fillStyle = ballColor;
         c.arc( this.x, this.y,this.radius,0, Math.PI*2, false);
         c.fill();
         c.stroke();
@@ -136,7 +137,7 @@ function isPaddleThere(x, y) {
 }
 
 function updatePaddle(event) {
-    if ('o' == event.key) {
+    if ('o' === event.key) {
         rightPaddle.y = rightPaddle.y - rightPaddle.dy;
     } 
     
@@ -153,7 +154,6 @@ function updatePaddle(event) {
     }
 };
 
-var radius = 30, ballX = (width-radius)/2, ballY = heightG/2, ballDX = 1, ballDY = 1;
 function animate() {
 
     requestAnimationFrame(animate);
@@ -168,5 +168,6 @@ function animate() {
     rightPaddle.update();
     rightScore.draw();
     leftScore.draw();
+
 }
 animate();
