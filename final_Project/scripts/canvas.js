@@ -44,7 +44,21 @@ function Paddle(x, y = heightG / 2, dy, width = 15, height = 200) {
 var leftPaddle = new Paddle(00, heightG/2, .07);
 var rightPaddle = new Paddle(width-15, heightG/2, .07);
 
+// there should be 2 scores: 1 for each person
+function Score(xIn, yIn) {
+    this.score = 0; // score starts @ zero
+    this.x = xIn;
+    this.y = yIn;
 
+    this.draw = function() {
+        c.font = "80px Verdana";
+        c.fillText(this.score, this.x, this.y);
+    }
+
+}
+let quarterWidth = width / 4;
+var leftScore = new Score(quarterWidth, 100);
+var rightScore = new Score(width - quarterWidth, 100);
 
 // ball: capital functions are objects
 function Ball(x = (width-RAD)/2, y = heightG / 2, dx = 1, dy = 1, radius = RAD) {
@@ -57,17 +71,40 @@ function Ball(x = (width-RAD)/2, y = heightG / 2, dx = 1, dy = 1, radius = RAD) 
     this.draw = function() {
         c.beginPath();
         c.strokeStyle = "white";
+        c.fillStyle = "white";
         c.arc( this.x, this.y,this.radius,0, Math.PI*2, false);
+        c.fill();
         c.stroke();
     }
     this.update = function() {
-        // if we hit an edge, or a paddle!
+        // if we hit an edge then someone has scored
         if (this.x + this.radius > width || this.x - this.radius < 0
-            || isPaddleThere()  ) {
-            this.dx*=-1;
+            && !isPaddleThere()  ) {
+            
+
+            // if we hit the left side then the right player scores
+            if (this.x - this.radius < 0) {
+                rightScore.score = rightScore.score + 1;
+            }
+            // if we hit the right side then the left player scores
+            if (this.x + this.radius > width) {
+                leftScore.score = leftScore.score + 1;
+            }
+            this.x=x;
+            this.y = y;
         }
+        // if we hit the top or bottom
         if (this.y + this.radius > heightG || this.y - this.radius < 0) {
             this.dy*=-1;
+        }
+        if (isPaddleThere()) {
+            this.dx*=-1;
+
+            if (this.x < 20) {
+                x++;
+            }
+            else x--;
+
         }
     
         this.x += this.dx;
@@ -116,8 +153,6 @@ function updatePaddle(event) {
     }
 };
 
-
-
 var radius = 30, ballX = (width-radius)/2, ballY = heightG/2, ballDX = 1, ballDY = 1;
 function animate() {
 
@@ -131,5 +166,7 @@ function animate() {
 
     leftPaddle.update();
     rightPaddle.update();
+    rightScore.draw();
+    leftScore.draw();
 }
 animate();
