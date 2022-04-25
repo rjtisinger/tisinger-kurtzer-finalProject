@@ -1,7 +1,7 @@
 html {
     text-align: center;
 }
-body {
+body {text-align: center;
     background: tan;
     color: f8f8f8;
     display: inline;
@@ -14,4 +14,31 @@ canvas {
     display: block;
     outline: pink;
     background-color: black;
+}
+
+a {
+    font-size:x-large;
+    text-align: center;
+    color: rgb(255, 0, 0);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font-size: 80px;
+    text-align: center;
+    background-color: red;
+}
+
+footer {
+    font-size: 30px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: rgb(0, 0, 0);
+    text-align: center;
 }
