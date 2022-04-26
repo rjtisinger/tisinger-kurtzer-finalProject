@@ -4,12 +4,18 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <Title>Options</Title>
+
+    <link rel="stylesheet" type="text/css" href="sheets/styles.css">
     <style>
         p {
-            font-size :55px;
+            font-size: 200%;
             text-align:center
         }
-
+        h2 {
+            font-size: 200%;
+        }
         label {
             font-size: 40px;
             text-align: center;
@@ -24,14 +30,6 @@
             padding: 20px;
         }
     </style>
-
-
-    <meta charset="utf-8">
-    <meta keywords="Pong, Ping-Pong">
-    <Title>Options</Title>
-
-    <link rel="stylesheet" type="text/css" href="sheets/styles.css">
-
 </head>
 
 <body>
@@ -41,24 +39,26 @@
 
     <a href="Title.html" onclick="updateOptions()"><h3>Go to Title Screen</h3> </a>
 
-    <p>Please enter what score you would like to play until:</p>
+    <h2>Please enter what score you would like to play until:</h2>
     <input type="number" id="endScore" name="endScore" value="10">
 
-    <p>Difficulty:</p>
+    <h2>Difficulty:</h2>
     <input type="radio" id="easy" name="diff" value="easy" checked>
-    <label for="difficulty">Easy</label><br>
+    <label for="easy">Easy</label><br>
     <input type="radio" id="hard" name="diff" value="hard">
-    <label for="difficulty">Hard</label><br>  
+    <label for="hard">Hard</label><br>  
 
-    <p>Ball Color:</p>
+    <h2>Ball Color:</h2>
     <input type="radio" id="white" name="color" value="white" checked>
-    <label for="difficulty">White</label><br>
+    <label for="white">White</label><br>
     <input type="radio" id="red" name="color" value="red">
-    <label for="difficulty">Red</label><br>  
+    <label for="red">Red</label><br>  
     <input type="radio" id="blue" name="color" value="blue">
-    <label for="difficulty">Blue</label><br>
+    <label for="blue">Blue</label><br>
     <input type="radio" id="pink" name="color" value="pink">
-    <label for="difficulty">Pink</label><br>  
+    <label for="pink">Pink</label><br>
+    
+    <p>To play the game, the left player uses the 'W' and 'S' keys to move, while the right player uses 'O' and 'L' to move.</p>
   
 
 
