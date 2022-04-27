@@ -6,7 +6,7 @@
 <head>
 
     <meta charset="utf-8">
-    <Title>Pong</Title>
+    <Title>Pong Game</Title>
 
     <link rel="stylesheet" type="text/css" href="sheets/styles.css">
 
@@ -15,9 +15,12 @@
 <body onload="initialize(); ">
     <div id="gameWrapper">
 
-        <canvas id="game"></canvas>
+        <canvas id="game" role="status" aria-label="The game board"></canvas>
 
     </div>
+
+    <p><a id="output" href="game.html"></a></p>
+    <p>Controls can be found in <a href="Options.html">Options</a></p>
 
     <script src="scripts/canvas.js"></script>
 

@@ -1,19 +1,24 @@
+/* Creates a courier font for me to use */
+@font-face {
+    font-family: myFont;
+    src: url("../fonts/Courier_Prime/CourierPrime-Regular.ttf");
+}
 html {
     text-align: center;
+    font-family: myFont;
 }
-body {text-align: center;
+body {
+    text-align: center;
     background: tan;
-    color: f8f8f8;
     display: inline;
     margin: 0;
 }
+/* creates a white background behind the canvas */
 #gameWrapper {
-
     color: white;
-
 }
+/* gives us a black canvas with some space on the bottom */
 canvas {
-    color: f8f8f8;
     padding: 0;
     margin: 0 auto;
     margin-bottom: 1rem;
@@ -21,24 +26,24 @@ canvas {
     outline: white;
     background-color: black;
 }
-
+/* Our hyperlinks appear as Red & uppercase */
 a {
-    font-size:x-large;
+    font-size: x-large;
     text-align: center;
     color: rgb(255, 0, 0);
     text-decoration: none;
     text-transform: uppercase;
 }
-
+/* Center our header and make it a certain size */
 h1 {
     margin: 0;
-    font-size: 80px;
+    font-size: 5em;
     text-align: center;
     background-color: red;
 }
-
+/* center the footer and make its text a certain size */
 footer {
-    font-size: 30px;
+    font-size: 2em;
     text-align: center;
     position: fixed;
     left: 0;

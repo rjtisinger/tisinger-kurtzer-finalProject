@@ -5,10 +5,11 @@
 
 <head>
     <meta charset="utf-8">
-    <Title>Options</Title>
+    <Title>Pong Options</Title>
 
     <link rel="stylesheet" type="text/css" href="sheets/styles.css">
     <style>
+        /* Centering a bunch of stuff & making it bigger */
         p {
             font-size: 200%;
             text-align:center
@@ -17,17 +18,16 @@
             font-size: 200%;
         }
         label {
-            font-size: 40px;
+            font-size: 2em;
             text-align: center;
         }
-
+        /* Specifically styles the box where we take in what the players would like to play to */
         #endScore
         {
-            font-size:14pt;
+            font-size: 1em;
         }
-
         body{
-            padding: 20px;
+            padding: 1em;
         }
     </style>
 </head>
@@ -35,18 +35,23 @@
 <body>
     <h1>Options</h1>
     
-    <a href="game.html" onclick="updateOptions()"> <h3>Play Pong!</h3></a>
+    <!-- nav for ARIA accessibility-->
+    <nav>
 
-    <a href="Title.html" onclick="updateOptions()"><h3>Go to Title Screen</h3> </a>
+        <a href="game.html" onclick="updateOptions()"> <h3>Play Pong!</h3></a>
+
+        <a href="index.html" onclick="updateOptions()"><h3>Go to Title Screen</h3> </a>
+
+    </nav>
 
     <h2>Please enter what score you would like to play until:</h2>
     <input type="number" id="endScore" name="endScore" value="10">
 
     <h2>Difficulty:</h2>
     <input type="radio" id="easy" name="diff" value="easy" checked>
-    <label for="easy">Easy</label><br>
+    <label for="easy" aria-live="polite">Easy</label><br>
     <input type="radio" id="hard" name="diff" value="hard">
-    <label for="hard">Hard</label><br>  
+    <label for="hard" aria-live="polite">Hard</label><br>  
 
     <h2>Ball Color:</h2>
     <input type="radio" id="white" name="color" value="white" checked>
@@ -56,8 +61,8 @@
     <input type="radio" id="blue" name="color" value="blue">
     <label for="blue">Blue</label><br>
     <input type="radio" id="pink" name="color" value="pink">
-    <label for="pink">Pink</label><br>
-    
+    <label for="pink">Pink</label>
+    <hr>
     <p>To play the game, the left player uses the 'W' and 'S' keys to move, while the right player uses 'O' and 'L' to move.</p>
   
 
