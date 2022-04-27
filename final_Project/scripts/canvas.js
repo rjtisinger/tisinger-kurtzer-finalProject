@@ -1,9 +1,11 @@
 // canvas is the html canvas element
 var canvas = document.querySelector('canvas');
-const RAD = 30;
+const RAD = 30; // constant ball radius
 var width = canvas.width = window.innerWidth - RAD;
 var heightG = canvas.height = window.innerHeight;
 var ballColor = "white", winLimit = 10, ballSpeed = 2; // sets the default ball color & winLimit & ballSpeed
+var leftDown = false, leftUp= false, rightDown = false, rightUp = false; 
+
 
 function updateOptions() {
 
@@ -67,7 +69,7 @@ function Paddle(x, y = heightG / 2, dy, width = 15, height = 200) {
 
         if (this.y < 0) {
             this.y = 0;
-        } else if(this.y +this.height > heightG) {
+        } else if(this.y + this.height > heightG) {
             this.y = heightG - this.height;
         }
         this.draw();
@@ -77,8 +79,8 @@ function Paddle(x, y = heightG / 2, dy, width = 15, height = 200) {
 
 }
 
-var leftPaddle = new Paddle(00, heightG/2, .07);
-var rightPaddle = new Paddle(width-15, heightG/2, .07);
+var leftPaddle = new Paddle(00, heightG/2, 2);
+var rightPaddle = new Paddle(width-15, heightG/2, 2);
 
 // there should be 2 scores: 1 for each person
 function Score(xIn, yIn) {
@@ -179,44 +181,80 @@ function isPaddleThere() {
 }
 
 function updatePaddle(event) {
-    if ('o' === event.key) {
-        rightPaddle.y = rightPaddle.y - rightPaddle.dy;
-        console.log(rightPaddle.dy);
+    console.log("Key down");
+    if (!rightUp && 'o' == event.key) {
+       rightUp = true;
     } 
     
-    if(event.key === 'w') {
-       leftPaddle.y = leftPaddle.y - leftPaddle.dy;
-       console.log(leftPaddle.dy);
+    if(!leftUp && event.key == 'w') {
+       leftUp = true;
     } 
     
-    if('l' === event.key) {
-        rightPaddle.y+=rightPaddle.dy;
-        console.log(rightPaddle.dy);
+    if(!rightDown && 'l' == event.key) {
+        rightDown = true;
     } 
     
-    if('s' === event.key) {
-        leftPaddle.y+=leftPaddle.dy;
-        console.log(leftPaddle.dy);
+    if(!leftDown && 's' == event.key) {
+        leftDown = true;
     }
 };
 
-function animate() {
+function keyUpEvent( event ) {
 
-    requestAnimationFrame(animate);
+    console.log("Key up");
+    if ('o' == event.key) {
+        rightUp = false;
+     } 
+     
+     if(event.key == 'w') {
+        leftUp = false;
+     } 
+     
+     if('l' == event.key) {
+         rightDown = false;
+     } 
+     
+     if('s' == event.key) {
+         leftDown = false;
+     }
+
+
+}
+
+var temp2 = true;
+function animate() {
 
     c.clearRect(0,0,width, heightG);
 
     ball.update();
 
-    document.addEventListener('keypress', (e) => this.updatePaddle(e));
+    document.addEventListener('keydown', (e) => this.updatePaddle(e));
+    document.addEventListener('keyup', (e) => this.keyUpEvent(e));
+
+
+    if (leftUp) {
+        leftPaddle.y -= leftPaddle.dy;
+    }
+    if (leftDown) {
+        leftPaddle.y += leftPaddle.dy;
+    }
+    if (rightUp) {
+        rightPaddle.y -= rightPaddle.dy;
+    }
+    if (rightDown) {
+        rightPaddle.y += rightPaddle.dy;
+    }
 
     leftPaddle.update();
     rightPaddle.update();
     rightScore.draw();
     leftScore.draw();
 
-    document.removeEventListener('keypress', (e) => this.updatePaddle(e));
+    document.removeEventListener('keydown', (e) => this.updatePaddle(e));
+    document.removeEventListener('keyup', (e) => this.keyUpEvent(e));
 
+
+    // win conditions
     if (rightScore.score >= winLimit) {
         c.font = "100px Verdana";
         c.strokeStyle = "white";
@@ -238,6 +276,7 @@ function animate() {
         setTimeout( () => window.location.replace("title.html"), 10000)
 
     }
+    requestAnimationFrame(animate);
 }
 function initialize() {
 
@@ -262,6 +301,10 @@ function initialize() {
     console.log("Win limit: " + winLimit);
     ball.dy = ballSpeed;
     ball.dx = ballSpeed;
+    leftUp = false;
+    leftDown = false;
+    rightUp = false;
+    rightDown = false;
 
     animate();
 }
