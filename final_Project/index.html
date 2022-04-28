@@ -5,10 +5,11 @@
 
 <head>
     <meta charset="utf-8">
-    <Title>Pong</Title>
+    <Title>Pong Title</Title>
 
     <link rel="stylesheet" type="text/css" href="sheets/styles.css">
     <style>
+        /* Puts a backround image on the title screen */
         html { 
          background: url('pong.jpg') no-repeat center center fixed; 
          -webkit-background-size: cover;
@@ -22,17 +23,24 @@
 <body>
     <h1>Pong</h1>
     
-    <a href="game.html"> <h2>Play Pong</h2></a>
+    <!-- nav for ARIA accessiblity-->
+    <nav>
 
-    <br>
+        <!--Play Link-->
+        <a href="game.html"> <h2>Play Pong</h2></a>
 
-    <a href="Options.html"><h2>Options</h2> </a>
+        <br>
 
-    
+        <!--Options Link-->
+        <a href="Options.html"><h2>Options</h2> </a>
+
+    </nav>
+
+    <!--Gives information about the game/project-->
     <footer>
-        <p>Creators: Richard J. Tisinger & Spencer Kurtzner</p>
+        <p>Created by: Richard J. Tisinger</p>
         <p>4/29/2022</p>
-        <p>Project 5 - Pong</p>
+        <p>Project 5 - Pong | Click options if you have not played before.</p>
         <p>Dr. Freeman Lo's ITEC 225-01</p>
     </footer>
 </body>
